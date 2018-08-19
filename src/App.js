@@ -1,15 +1,54 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import { Custom_Token } from './globalassets';
+
 import {
   Layout, Header, Navigation, Drawer, Content, Grid, Cell, Card, CardTitle, CardText,
   CardActions, Button, Textfield
 } from 'react-mdl';
 
+import $ from 'jquery';
+import { Link } from 'react-router-dom';
+
 class App extends Component {
+  constructor(){
+    super();
+    this.state={
+      username:'', password:'', token:''
+    }
+  }
+
+  loginUser(){
+    let $that = $(this);
+    let loginData = {
+      "unique_key":this.state.username,
+      "password":this.state.password
+    }
+    let payload = JSON.stringify(loginData);
+    $.ajax({
+      url:'http://api.esplitzpro.com/v1/users/login',
+      data:payload,
+      dataType:'json',
+      method:'POST',
+      contentType:'application/json',
+      success:function(data){
+        if(data.success === true){
+          $that[0].setState({token:data.token});
+          Custom_Token._defaultValue = data.token;
+          $('#navHome')[0].click();
+        }
+      },
+      error:function(){
+        alert("Error");
+      }
+    });
+  }
+
   render() {
     return (
       <div>
+        <Link to={'/home/'+this.state.token} id="navHome"></Link>
         <div style={{height: '500px', position: 'relative'}}>
             <Layout>
                 <Header transparent title="eSplitz" style={{color: '#c00', 
@@ -35,11 +74,12 @@ class App extends Component {
                         </CardTitle>
                         <p style={{textAlign:'center'}}>New to eSplitz ? <a href="/#/signup">Sign Up!</a></p>
                         <CardText style={{textAlign:'center'}}>
-                            <Textfield label="Username" floatingLabel />
-                            <Textfield label="Password" type="password" floatingLabel />
+                            <Textfield label="Username" floatingLabel onChange={(e) => this.setState({username:e.target.value})}/>
+                            <Textfield label="Password" type="password" floatingLabel onChange={(e) => this.setState({password:e.target.value})}/>
                         </CardText>
                         <CardActions style={{textAlign:'center'}}>
-                            <Button raised style={{width:'85%', margin:'auto 10px', backgroundColor:'#c00', color:'#fff'}}>Login</Button>
+                            <Button raised style={{width:'85%', margin:'auto 10px', backgroundColor:'#c00', color:'#fff'}}
+                            onClick={this.loginUser.bind(this)}>Login</Button>
                         </CardActions>
                       </Card>
                     </Cell>

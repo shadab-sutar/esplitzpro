@@ -19,3 +19,8 @@
 .single-radio{
     margin-right: 25px !important;
 }
+
+.paybar{
+    margin: 20px;
+    display: flex;
+}
