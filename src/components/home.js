@@ -3,7 +3,7 @@ import '../App.css';
 import { Custom_Token } from '../globalassets';
 import {
     Layout, Header, Navigation,  Grid, Cell, Button, Dialog, DialogActions, DialogContent,
-    DialogTitle, RadioGroup, Radio, Textfield, DataTable, TableHeader
+    DialogTitle, RadioGroup, Radio, Textfield, DataTable, TableHeader, Snackbar
   } from 'react-mdl';
 
 import $ from 'jquery';
@@ -14,10 +14,7 @@ class Home extends Component{
         super(props);
         this.state = {
             ctype:'', c_name:'', cnumber:'', cexpiry:'',ccvv:'', token:'', 
-            cards:[{
-                "name":"Shadab",
-                "number":"123456781234"
-            }]
+            cards:[], isSnackbarActive:false
         };
         this.handleOpenDialog = this.handleOpenDialog.bind(this);
         this.handleCloseDialog = this.handleCloseDialog.bind(this);
@@ -47,10 +44,9 @@ class Home extends Component{
                 debugger;
                 console.log(data);
                 console.log(JSON.stringify($that[0].state.cards));
-                //$that[0].setState({cards:data.cards});
+                $that[0].setState({cards:data.cards});
             },
             error:function(data){
-                debugger;
                 console.log(data);
             }
         });
@@ -91,6 +87,10 @@ class Home extends Component{
             },
             success:function(data){
                 debugger;
+                if(data.success === true){
+                    $that[0].setState({isSnackbarActive:true, openDialog: false});
+                    $that[0].getCards();
+                }
             },
             error:function(data){
                 debugger;
@@ -100,7 +100,16 @@ class Home extends Component{
     }
 
     render(){
-        let row = [{id:"1",name:'Shadab', cnumber:'123456789012', amount:<Textfield label="Amount" />}];
+        let row = [];
+        for(var i=0;i<this.state.cards.length;i++){
+            let obj = {
+                "name":this.state.cards[i].name,
+                "cnumber":this.state.cards[i].cc_number,
+                "amount":<Textfield label="Amount" floatingLabel />
+            }
+
+            row.push(obj);
+        }
         return(
             <div>
                 <Link to={'/'} id="lpNav"></Link>
@@ -129,10 +138,11 @@ class Home extends Component{
                                 shadow={0}
                                 rowKeyColumn="id"
                                 rows={row}
+                                style={{width:'100%'}}
                             >
                                 <TableHeader name="name" tooltip="The amazing material name">Name</TableHeader>
-                                <TableHeader numeric name="cnumber" tooltip="Number of materials">Card Number</TableHeader>
-                                <TableHeader numeric name="amount">Amount</TableHeader>
+                                <TableHeader name="cnumber" tooltip="Number of materials">Card Number</TableHeader>
+                                <TableHeader name="amount">Amount</TableHeader>
                             </DataTable>
                             <Dialog open={this.state.openDialog} style={{width:'40%'}}>
                                 <DialogTitle style={{textAlign:'center'}}>Your Payment Options</DialogTitle>
@@ -157,6 +167,9 @@ class Home extends Component{
                                     <Button type='button' onClick={this.handleCloseDialog}>Cancel</Button>
                                 </DialogActions>
                             </Dialog>
+                            <Snackbar active={this.state.isSnackbarActive}>
+                                Card Added Successfully !
+                            </Snackbar>
                         </Cell>
                     </Grid>
                 </div>

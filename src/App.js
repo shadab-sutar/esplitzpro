@@ -74,7 +74,7 @@ class App extends Component {
                         </CardTitle>
                         <p style={{textAlign:'center'}}>New to eSplitz ? <a href="/#/signup">Sign Up!</a></p>
                         <CardText style={{textAlign:'center'}}>
-                            <Textfield label="Username" floatingLabel onChange={(e) => this.setState({username:e.target.value})}/>
+                            <Textfield label="Enter Email or Phone" floatingLabel onChange={(e) => this.setState({username:e.target.value})}/>
                             <Textfield label="Password" type="password" floatingLabel onChange={(e) => this.setState({password:e.target.value})}/>
                         </CardText>
                         <CardActions style={{textAlign:'center'}}>
