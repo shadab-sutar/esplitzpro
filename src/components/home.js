@@ -14,7 +14,7 @@ class Home extends Component{
         super(props);
         this.state = {
             ctype:'', c_name:'', cnumber:'', cexpiry:'',ccvv:'', token:'', 
-            cards:[], isSnackbarActive:false
+            cards:[], isSnackbarActive:false, amountpayable:0, msg1:'', msgdisp:'none'
         };
         this.handleOpenDialog = this.handleOpenDialog.bind(this);
         this.handleCloseDialog = this.handleCloseDialog.bind(this);
@@ -27,6 +27,11 @@ class Home extends Component{
         console.log(Custom_Token);
         this.setState({token:Custom_Token._defaultValue})
         this.getCards();
+    }
+
+    logout(){
+        Custom_Token._defaultValue = "";
+        $('#lpNav')[0].click();
     }
 
     getCards(){
@@ -52,6 +57,11 @@ class Home extends Component{
         });
     }
 
+    addAmount(e){
+        this.setState({amountpayable:e.target.value});
+
+    }
+
     handleOpenDialog() {
     this.setState({
         openDialog: true
@@ -60,7 +70,10 @@ class Home extends Component{
 
     handleCloseDialog() {
     this.setState({
-        openDialog: false
+        openDialog: false,
+        ctype:'', c_name:'', cnumber:'', cexpiry:'',ccvv:'',
+        msg1:'',
+        msgdisp:'none'
     });
     }
     
@@ -86,15 +99,13 @@ class Home extends Component{
                 xhr.setRequestHeader("Authorization", token);
             },
             success:function(data){
-                debugger;
                 if(data.success === true){
                     $that[0].setState({isSnackbarActive:true, openDialog: false});
                     $that[0].getCards();
                 }
             },
             error:function(data){
-                debugger;
-                alert(data.responseJSON.error);
+                $that[0].setState({msgdisp:'block', msg1:data.responseJSON.error});
             }
         });
     }
@@ -105,7 +116,7 @@ class Home extends Component{
             let obj = {
                 "name":this.state.cards[i].name,
                 "cnumber":this.state.cards[i].cc_number,
-                "amount":<Textfield label="Amount" floatingLabel />
+                "amount":<Textfield label="Amount" floatingLabel style={{width:'100px'}} onChange={this.addAmount.bind(this)} />
             }
 
             row.push(obj);
@@ -121,7 +132,7 @@ class Home extends Component{
                                 <a style={{color: '#c00'}}><Button onClick={this.handleOpenDialog}>Manage Payment Options</Button></a>
                                 <a style={{color: '#c00'}}><Button>Account Settings</Button></a>
                                 <a style={{color: '#c00'}}><Button>Help</Button></a>
-                                <a style={{color: '#c00'}}><Button>Logout</Button></a>
+                                <a style={{color: '#c00'}}><Button onClick={this.logout.bind(this)}>Logout</Button></a>
                             </Navigation>
                         </Header>
                     </Layout>
@@ -130,9 +141,10 @@ class Home extends Component{
                     <Grid style={{padding:'0px'}}>
                         <Cell col={12} style={{margin:'0px', color:'black'}}>
                             <div className="paybar">
-                                <Textfield label="Amount" value="0.00" floatingLabel style={{}} />
+                                <Textfield label="Amount" value={this.state.amountpayable} floatingLabel style={{}} />
                                 <Button raised>Pay</Button>
                             </div>
+                            <div className="scrollcontainer">
                             <DataTable
                                 selectable
                                 shadow={0}
@@ -144,6 +156,7 @@ class Home extends Component{
                                 <TableHeader name="cnumber" tooltip="Number of materials">Card Number</TableHeader>
                                 <TableHeader name="amount">Amount</TableHeader>
                             </DataTable>
+                            </div>
                             <Dialog open={this.state.openDialog} style={{width:'40%'}}>
                                 <DialogTitle style={{textAlign:'center'}}>Your Payment Options</DialogTitle>
                                 <p style={{borderBottom:'0.5px solid #c00', margin:'10px'}}></p>
@@ -156,11 +169,12 @@ class Home extends Component{
                                         </RadioGroup>
                                     </div>
                                     <div style={{textAlign:'center', marginTop:'20px'}}>
-                                        <Textfield label="Name" floatingLabel style={{width:'80%'}} onChange={(e) => this.setState({c_name:e.target.value})}/>
-                                        <Textfield label="Card Number" floatingLabel style={{width:'80%'}} onChange={(e) => this.setState({cnumber:e.target.value})}/>
-                                        <Textfield label="Expiry Date" floatingLabel style={{width:'80%'}} onChange={(e) => this.setState({cexpiry:e.target.value})}/>
-                                        <Textfield label="Card CVV" floatingLabel style={{width:'80%'}} onChange={(e) => this.setState({ccvv:e.target.value})}/>
+                                        <Textfield label="Name" value={this.state.c_name} floatingLabel style={{width:'80%'}} onChange={(e) => this.setState({c_name:e.target.value})}/>
+                                        <Textfield label="Card Number" value={this.state.cnumber} floatingLabel style={{width:'80%'}} onChange={(e) => this.setState({cnumber:e.target.value})}/>
+                                        <Textfield label="Expiry Date" value={this.state.cexpiry} floatingLabel style={{width:'80%'}} onChange={(e) => this.setState({cexpiry:e.target.value})}/>
+                                        <Textfield label="Card CVV" value={this.state.ccvv} floatingLabel style={{width:'80%'}} onChange={(e) => this.setState({ccvv:e.target.value})}/>
                                     </div>
+                                    <p style={{display:this.state.msgdisp, color:'#c00', textAlign:'center'}}>{this.state.msg1}</p>
                                 </DialogContent>
                                 <DialogActions>
                                     <Button type='button' onClick={this.savepayoption.bind(this)}>Verify and Save</Button>

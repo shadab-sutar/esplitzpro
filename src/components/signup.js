@@ -95,6 +95,43 @@ class Signup extends Component {
         </div>
         <div className="main-content">
           <h1>Hello World</h1>
+          <p>
+          Lorem ipsum dolor sit amet, 
+          consectetuer adipiscing elit. 
+          Nulla quis diam. Praesent dapibus. 
+          Cum sociis natoque penatibus et magnis
+          dis parturient montes, nascetur ridiculus mus. 
+          Nemo enim ipsam voluptatem quia voluptas sit aspernatur 
+          aut odit aut fugit, sed quia consequuntur magni dolores 
+          eos qui ratione voluptatem sequi nesciunt. 
+          Proin in tellus sit amet nibh dignissim sagittis. 
+          Morbi leo mi, nonummy eget tristique non, 
+          rhoncus non leo. Aenean fermentum risus id tortor. 
+          Vivamus luctus egestas leo. In dapibus augue non sapien.
+          Duis bibendum, lectus ut viverra rhoncus, dolor nunc faucibus libero, 
+          eget facilisis enim ipsum id lacus. Nullam faucibus mi quis velit. 
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+          Nulla non arcu lacinia neque faucibus fringilla. In rutrum. 
+          Integer imperdiet lectus quis justo. Nullam faucibus mi quis velit. 
+          Nunc tincidunt ante vitae massa. Nulla non arcu lacinia neque faucibus fringilla.
+
+          Curabitur vitae diam non enim vestibulum interdum. 
+          Etiam commodo dui eget wisi. Mauris elementum mauris vitae tortor. 
+          Sed ac dolor sit amet purus malesuada congue. Nunc auctor. 
+          Curabitur vitae diam non enim vestibulum interdum. 
+          Maecenas aliquet accumsan leo. Fusce tellus. 
+          Curabitur vitae diam non enim vestibulum interdum. 
+          Etiam ligula pede, sagittis quis, interdum ultricies, 
+          scelerisque eu. Etiam sapien elit, consequat eget, 
+          tristique non, venenatis quis, ante. Nulla non lectus 
+          sed nisl molestie malesuada. Aliquam erat volutpat. 
+          Fusce tellus odio, dapibus id fermentum quis, suscipit id erat. 
+          Integer in sapien. Donec quis nibh at felis congue commodo. 
+          Vestibulum fermentum tortor id mi. In convallis. Neque porro quisquam est, 
+          qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, 
+          sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam 
+          aliquam quaerat voluptatem.
+          </p>
         </div>
         <div className="footer">
           <h1>Footer</h1>

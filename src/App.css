@@ -23,4 +23,11 @@
 .paybar{
     margin: 20px;
     display: flex;
+    width:50%;
+}
+
+.scrollcontainer{
+    width: 51%;
+    height: 50%;
+    overflow-y: auto;
 }
