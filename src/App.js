@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-
+//import Banner from 'http://esplitzpro.com/ui/banner.jpg';
 import { Custom_Token } from './globalassets';
 
 import {
@@ -71,14 +71,14 @@ class App extends Component {
                   <div className="content">
                   <Grid style={{padding:'0px'}}>
                     <Cell col={8} style={{margin:'0px'}}>
-                        <img src={require('./assests/banner.jpg')} alt="bnimg" style={{width:'100vw'}}/>
+                        <img src='http://esplitzpro.com/ui/banner.jpg' alt="bnimg" style={{width:'100vw'}}/>
                     </Cell>
                     <Cell col={4}>
                       <Card shadow={0} style={{width: '80%', margin: 'auto', height:'43%'}}>
                         <CardTitle style={{height: '100px', margin:'0px', justifyContent:'center'}}>
                           Welcome to eSplitz
                         </CardTitle>
-                        <p style={{textAlign:'center'}}>New to eSplitz ? <a href="/#/signup">Sign Up!</a></p>
+                        <p style={{textAlign:'center'}}>New to eSplitz ? <a href="#/signup">Sign Up!</a></p>
                         <p style={{display:this.state.msgdisp1, textAlign:'center', color:'#c00'}}>{this.state.msg1}</p>
                         <CardText style={{textAlign:'center'}}>
                             <Textfield label="Enter Email or Phone" value={this.state.username} floatingLabel onChange={(e) => this.setState({username:e.target.value})}/>

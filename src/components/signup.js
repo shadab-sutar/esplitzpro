@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-
+//import Banner from 'http://esplitzpro.com/ui/banner.jpg';
 import {
   Layout, Header, Navigation, Drawer, Content, Grid, Cell, Card, CardTitle, CardText,
   CardActions, Button, Textfield, RadioGroup, Radio
@@ -62,14 +62,14 @@ class Signup extends Component {
                   <div className="content">
                   <Grid style={{padding:'0px'}}>
                     <Cell col={8} style={{margin:'0px'}}>
-                        <img src={require('../assests/banner.jpg')} alt="bnimg" style={{width:'100vw'}}/>
+                        <img src='http://esplitzpro.com/ui/banner.jpg' alt="bnimg" style={{width:'100vw'}}/>
                     </Cell>
                     <Cell col={4}>
                       <Card shadow={0} style={{width: '80%', margin: 'auto', height:'64%'}}>
                         <CardTitle style={{height: '100px', margin:'0px', justifyContent:'center'}}>
                           Welcome to eSplitz
                         </CardTitle>
-                        <p style={{textAlign:'center'}}>Already a member ? <a href="/#/">Login</a></p>
+                        <p style={{textAlign:'center'}}>Already a member ? <a href="#/">Login</a></p>
                         <div style={{textAlign:'center'}}>
                             <RadioGroup name="acctype" value="pers">
                                 <Radio value="pers" ripple className="single-radio">Personal</Radio>
