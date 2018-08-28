@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 //import Banner from 'http://esplitzpro.com/ui/banner.jpg';
-import { Custom_Token } from './globalassets';
+import { Custom_Token, baseURI, userName } from './globalassets';
 
 import {
   Layout, Header, Navigation, Drawer, Content, Grid, Cell, Card, CardTitle, CardText,
@@ -15,7 +15,7 @@ class App extends Component {
   constructor(){
     super();
     this.state={
-      username:'', password:'', token:'', msg1:'', msgdisp1:'none'
+      username:'', password:'', token:'', msg1:'', msgdisp1:'hidden'
     }
   }
 
@@ -27,7 +27,7 @@ class App extends Component {
     }
     let payload = JSON.stringify(loginData);
     $.ajax({
-      url:'http://api.esplitzpro.com/v1/users/login',
+      url:baseURI._defaultValue+'/users/login',
       data:payload,
       dataType:'json',
       method:'POST',
@@ -36,14 +36,14 @@ class App extends Component {
         if(data.success === true){
           $that[0].setState({token:data.token});
           Custom_Token._defaultValue = data.token;
+          userName._defaultValue = data.user.name;
           $('#navHome')[0].click();
         }
       },
       error:function(data){
-       debugger;
        $that[0].setState({
          msg1:data.responseJSON.error, 
-         msgdisp1:'block',
+         msgdisp1:'visible',
          username:'',
          password:''
       });
@@ -54,7 +54,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Link to={'/home/'+this.state.token} id="navHome"></Link>
+        <Link to={'/home'} id="navHome"></Link>
         <div style={{height: '500px', position: 'relative'}}>
             <Layout>
                 <Header transparent title="eSplitz" style={{color: '#c00', 
@@ -67,19 +67,19 @@ class App extends Component {
                     </Navigation>
                 </Header>
                 <Drawer />
-                <Content style={{backgroundColor:'whitesmoke', overflowY:'hidden', marginTop:'75px'}}>
+                <Content style={{backgroundColor:'#898a8c'}}>
                   <div className="content">
-                  <Grid style={{padding:'0px'}}>
-                    <Cell col={8} style={{margin:'0px'}}>
-                        <img src='http://esplitzpro.com/ui/banner.jpg' alt="bnimg" style={{width:'100vw'}}/>
+                  <Grid style={{padding:'0px', marginTop:'75px'}}>
+                    <Cell col={8} style={{margin:'0px', height:'100%'}}>
+                        
                     </Cell>
-                    <Cell col={4}>
-                      <Card shadow={0} style={{width: '80%', margin: 'auto', height:'43%'}}>
+                    <Cell col={4} style={{height:'100%'}}>
+                      <Card shadow={0} style={{width: '80%', margin: 'auto', height:'100%', padding:'15px'}}>
                         <CardTitle style={{height: '100px', margin:'0px', justifyContent:'center'}}>
                           Welcome to eSplitz
                         </CardTitle>
                         <p style={{textAlign:'center'}}>New to eSplitz ? <a href="#/signup">Sign Up!</a></p>
-                        <p style={{display:this.state.msgdisp1, textAlign:'center', color:'#c00'}}>{this.state.msg1}</p>
+                        <p style={{visibility:this.state.msgdisp1, textAlign:'center', color:'#c00', margin:'0px', padding:'0px', border:'0px'}}>{this.state.msg1}</p>
                         <CardText style={{textAlign:'center'}}>
                             <Textfield label="Enter Email or Phone" value={this.state.username} floatingLabel onChange={(e) => this.setState({username:e.target.value})}/>
                             <Textfield label="Password" type="password" value={this.state.password} floatingLabel onChange={(e) => this.setState({password:e.target.value})}/>
@@ -96,47 +96,27 @@ class App extends Component {
             </Layout>
         </div>
         <div className="main-content">
-          <h1>Hello World</h1>
+          <h4>Supercharge your business and personal payment experience with eSplitzpro</h4>
           <p>
-          Lorem ipsum dolor sit amet, 
-          consectetuer adipiscing elit. 
-          Nulla quis diam. Praesent dapibus. 
-          Cum sociis natoque penatibus et magnis
-          dis parturient montes, nascetur ridiculus mus. 
-          Nemo enim ipsam voluptatem quia voluptas sit aspernatur 
-          aut odit aut fugit, sed quia consequuntur magni dolores 
-          eos qui ratione voluptatem sequi nesciunt. 
-          Proin in tellus sit amet nibh dignissim sagittis. 
-          Morbi leo mi, nonummy eget tristique non, 
-          rhoncus non leo. Aenean fermentum risus id tortor. 
-          Vivamus luctus egestas leo. In dapibus augue non sapien.
-          Duis bibendum, lectus ut viverra rhoncus, dolor nunc faucibus libero, 
-          eget facilisis enim ipsum id lacus. Nullam faucibus mi quis velit. 
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-          Nulla non arcu lacinia neque faucibus fringilla. In rutrum. 
-          Integer imperdiet lectus quis justo. Nullam faucibus mi quis velit. 
-          Nunc tincidunt ante vitae massa. Nulla non arcu lacinia neque faucibus fringilla.
-
-          Curabitur vitae diam non enim vestibulum interdum. 
-          Etiam commodo dui eget wisi. Mauris elementum mauris vitae tortor. 
-          Sed ac dolor sit amet purus malesuada congue. Nunc auctor. 
-          Curabitur vitae diam non enim vestibulum interdum. 
-          Maecenas aliquet accumsan leo. Fusce tellus. 
-          Curabitur vitae diam non enim vestibulum interdum. 
-          Etiam ligula pede, sagittis quis, interdum ultricies, 
-          scelerisque eu. Etiam sapien elit, consequat eget, 
-          tristique non, venenatis quis, ante. Nulla non lectus 
-          sed nisl molestie malesuada. Aliquam erat volutpat. 
-          Fusce tellus odio, dapibus id fermentum quis, suscipit id erat. 
-          Integer in sapien. Donec quis nibh at felis congue commodo. 
-          Vestibulum fermentum tortor id mi. In convallis. Neque porro quisquam est, 
-          qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, 
-          sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam 
-          aliquam quaerat voluptatem.
+            Accept payments from all major credit and debit card networks like Visa, 
+            Mastercard, American Express and RuPay. Also get access to international card payments.
+          </p>
+          <p>
+            With the easiest integration, completely online onboarding, feature filled checkout and 
+            best in class performance, quickly go live with eSplitzpro and experience the future of payments.
+          </p>
+          <p>
+            An easy to integrate Checkout with cards saved across businesses so that your 
+            customers can pay seamlessly everywhere. Get reports and detailed statistics on payments, 
+            settlements, refunds and much more for you to take better business decisions. Robust, clean, 
+            developer friendly APIs, plugins and libraries for all major languages and platforms that 
+            let you focus on building great products. 
+            PCI DSS Level 1 compliant along with frequent third party audits and a dedicated internal 
+            security team to make sure your data is always safe.
           </p>
         </div>
         <div className="footer">
-          <h1>Footer</h1>
+          <p style={{color:'white', textAlign:'center'}}>&copy; eSplitz, 2018</p>
         </div>
       </div>
     );

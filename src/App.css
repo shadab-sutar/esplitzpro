@@ -8,12 +8,16 @@
 
 .main-content{
     margin: 20px;
-    height: 500px;
+    height: 300px;
+
 }
 
 .footer{
-    height: 200px;
+    height: 100px;
     background-color: #3a3738;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
 
 .single-radio{
@@ -21,9 +25,16 @@
 }
 
 .paybar{
-    margin: 20px;
+    margin-left: 20px;
+    margin-top:30px;
     display: flex;
-    width:50%;
+    width:80%;
+    align-items: baseline;
+    float: right;
+}
+
+.paybar > div{
+    float: right;
 }
 
 .scrollcontainer{

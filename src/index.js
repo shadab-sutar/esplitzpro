@@ -16,7 +16,7 @@ ReactDOM.render(
         <Switch>
             <Route exact path="/" component={App} />
             <Route path="/signup" component={Signup} />
-            <Route path="/home/:token" component={Home} />
+            <Route path="/home" component={Home} />
         </Switch>
     </HashRouter>
     , document.getElementById('root'));
