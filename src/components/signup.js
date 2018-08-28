@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { baseURI, Custom_Token, ftime } from '../globalassets';
+import { baseURI, Custom_Token, ftime, userName } from '../globalassets';
 import {
   Layout, Header, Navigation, Drawer, Content, Grid, Cell, Card, CardTitle, CardText,
   CardActions, Button, Textfield, RadioGroup, Radio
@@ -87,13 +87,11 @@ class Signup extends Component {
       dataType:'json',
       method:'POST',
       contentType:'application/json',
-      success:function(data, response){
-        debugger;
-        if(data.success === "true"){
+      success:function(data){
           Custom_Token._defaultValue = data.token;
+          userName._defaultValue = data.user.name;
           ftime._defaultValue = "New";
           $('#navHome')[0].click();
-        }
       },
       error:function(err){
         $that[0].setState({errDisp:'inline-block', errMsg:err.responseJSON.error});
