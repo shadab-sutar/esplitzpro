@@ -55,7 +55,7 @@ class App extends Component {
     return (
       <div>
         <Link to={'/home'} id="navHome"></Link>
-        <div style={{height: '500px', position: 'relative'}}>
+        <div style={{height: '100%', position: 'relative'}}>
             <Layout>
                 <Header transparent title="eSplitz" style={{color: '#c00', 
                   backgroundColor:'#fff', position:'fixed', top:'0'}}>
@@ -67,11 +67,29 @@ class App extends Component {
                     </Navigation>
                 </Header>
                 <Drawer />
-                <Content style={{backgroundColor:'#898a8c'}}>
-                  <div className="content">
-                  <Grid style={{padding:'0px', marginTop:'75px'}}>
-                    <Cell col={8} style={{margin:'0px', height:'100%'}}>
-                        
+                <Content />
+            </Layout>
+            <div className="content" style={{height:'100%'}}>
+                  <Grid style={{padding:'0px', marginTop:'75px', gridGap:'0'}}>
+                    <Cell col={8} style={{textAlign:'justify'}}>
+                    <h4>Supercharge your business and personal payment experience with eSplitzpro</h4>
+                    <p>
+                      Accept payments from all major credit and debit card networks like Visa, 
+                      Mastercard, American Express and RuPay. Also get access to international card payments.
+                    </p>
+                    <p>
+                      With the easiest integration, completely online onboarding, feature filled checkout and 
+                      best in class performance, quickly go live with eSplitzpro and experience the future of payments.
+                    </p>
+                    <p>
+                      An easy to integrate Checkout with cards saved across businesses so that your 
+                      customers can pay seamlessly everywhere. Get reports and detailed statistics on payments, 
+                      settlements, refunds and much more for you to take better business decisions. Robust, clean, 
+                      developer friendly APIs, plugins and libraries for all major languages and platforms that 
+                      let you focus on building great products. 
+                      PCI DSS Level 1 compliant along with frequent third party audits and a dedicated internal 
+                      security team to make sure your data is always safe.
+                    </p>
                     </Cell>
                     <Cell col={4} style={{height:'100%'}}>
                       <Card shadow={0} style={{width: '80%', margin: 'auto', height:'100%', padding:'15px'}}>
@@ -91,32 +109,13 @@ class App extends Component {
                       </Card>
                     </Cell>
                   </Grid>
+                  <div className="main-content">
+                    
                   </div>
-                </Content>
-            </Layout>
-        </div>
-        <div className="main-content">
-          <h4>Supercharge your business and personal payment experience with eSplitzpro</h4>
-          <p>
-            Accept payments from all major credit and debit card networks like Visa, 
-            Mastercard, American Express and RuPay. Also get access to international card payments.
-          </p>
-          <p>
-            With the easiest integration, completely online onboarding, feature filled checkout and 
-            best in class performance, quickly go live with eSplitzpro and experience the future of payments.
-          </p>
-          <p>
-            An easy to integrate Checkout with cards saved across businesses so that your 
-            customers can pay seamlessly everywhere. Get reports and detailed statistics on payments, 
-            settlements, refunds and much more for you to take better business decisions. Robust, clean, 
-            developer friendly APIs, plugins and libraries for all major languages and platforms that 
-            let you focus on building great products. 
-            PCI DSS Level 1 compliant along with frequent third party audits and a dedicated internal 
-            security team to make sure your data is always safe.
-          </p>
-        </div>
-        <div className="footer">
-          <p style={{color:'white', textAlign:'center'}}>&copy; eSplitz, 2018</p>
+                  <div className="footer">
+                    <p style={{color:'white', textAlign:'center'}}>&copy; eSplitz, 2018</p>
+                  </div>
+                  </div>
         </div>
       </div>
     );

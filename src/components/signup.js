@@ -150,8 +150,9 @@ class Signup extends Component {
                     </Navigation>
                 </Header>
                 <Drawer />
-                <Content style={{backgroundColor:'whitesmoke', overflowY:'hidden', marginTop:'75px'}}>
-                  <div className="content">
+                <Content />
+            </Layout>
+            <div className="content" style={{height:'100%', marginTop:'100px'}}>
                   <Grid style={{padding:'0px', height:'700px'}}>
                     <Cell col={7} style={{marginLeft:'8px', textAlign:'justify'}}>
                     <h4>Supercharge your business and personal payment experience with eSplitzpro</h4>
@@ -203,8 +204,6 @@ class Signup extends Component {
                     </Cell>
                   </Grid>
                   </div>
-                </Content>
-            </Layout>
         </div>
         <div className="footer">
           <p style={{color:'white', textAlign:'center'}}>&copy; eSplitz, 2018</p>
